@@ -135,7 +135,7 @@ app.use((req, res, next) => {
 
 // Root redirect
 app.get("/", (req, res) => {
-  res.redirect("/listings");
+  res.render("home.ejs");
 });
 
 // Routes
