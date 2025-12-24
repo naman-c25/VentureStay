@@ -56,7 +56,7 @@ const sessionOptions = {
 
 // Redirect root to listings
 app.get("/", (req, res) => {
-  res.redirect("/listings");
+  res.render("home.ejs");
 });
 
 app.use(session(sessionOptions));
