@@ -99,39 +99,39 @@ app.use((req, res, next) => {
 });
 
 // TEMPORARY ROUTE - Setup sample listings
-app.get("/setup-sample-listings", async (req, res) => {
-  try {
-    const Listing = require("./models/listing.js");
-    const User = require("./models/user.js");
-    const initData = require("./init/data.js");
+// app.get("/setup-sample-listings", async (req, res) => {
+//   try {
+//     const Listing = require("./models/listing.js");
+//     const User = require("./models/user.js");
+//     const initData = require("./init/data.js");
     
-    const count = await Listing.countDocuments();
-    if (count > 0) {
-      return res.send(`⚠️ Database already has ${count} listings. Delete them first if you want to reinitialize.`);
-    }
+//     const count = await Listing.countDocuments();
+//     if (count > 0) {
+//       return res.send(`⚠️ Database already has ${count} listings. Delete them first if you want to reinitialize.`);
+//     }
     
-    let defaultUser = await User.findOne({ username: "wanderlust-demo" });
+//     let defaultUser = await User.findOne({ username: "wanderlust-demo" });
     
-    if (!defaultUser) {
-      defaultUser = await User.createUser(
-        "wanderlust-demo",
-        "demo@wanderlust.com",
-        "Demo123456"
-      );
-    }
+//     if (!defaultUser) {
+//       defaultUser = await User.createUser(
+//         "wanderlust-demo",
+//         "demo@wanderlust.com",
+//         "Demo123456"
+//       );
+//     }
     
-    const listingsWithOwner = initData.data.map((listing) => ({
-      ...listing,
-      owner: defaultUser._id,
-    }));
+//     const listingsWithOwner = initData.data.map((listing) => ({
+//       ...listing,
+//       owner: defaultUser._id,
+//     }));
     
-    await Listing.insertMany(listingsWithOwner);
+//     await Listing.insertMany(listingsWithOwner);
     
-    res.send(`✅ SUCCESS! Added ${listingsWithOwner.length} sample listings. Visit /listings to see them!`);
-  } catch (err) {
-    res.status(500).send(`❌ Error: ${err.message}`);
-  }
-});
+//     res.send(`✅ SUCCESS! Added ${listingsWithOwner.length} sample listings. Visit /listings to see them!`);
+//   } catch (err) {
+//     res.status(500).send(`❌ Error: ${err.message}`);
+//   }
+// });
 
 // Root redirect
 app.get("/", (req, res) => {
